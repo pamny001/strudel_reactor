@@ -11,6 +11,8 @@ import { stranger_tune } from './tunes';
 import console_monkey_patch, { getD3Data } from './console-monkey-patch';
 import ControlButtons from './components/controlButtons';
 import PlayBackButtons from './components/playBackButtons';
+import StrudelContainer from './components/strudelContainer';
+import TextField from './components/textField';
 
 let globalEditor = null;
 
@@ -116,19 +118,21 @@ return (
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
-                        <label htmlFor="exampleFormControlTextarea1" className="form-label">Text to preprocess:</label>
-                        <textarea className="form-control" rows="15" id="proc" ></textarea>
+                        {/*Text Field*/}
+                        <TextField />
                     </div>
                     <div className="col-md-4">
+                        {/*Play/Stop/Preprocess/Proc&Play*/}
                         <PlayBackButtons />
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
-                        <div id="editor" />
-                        <div id="output" />
+                        {/*Strudel container*/}
+                        <StrudelContainer />
                     </div>
                     <div className="col-md-4">
+                        {/*On and Hush Buttons*/}
                         <ControlButtons />
                     </div>
                 </div>
