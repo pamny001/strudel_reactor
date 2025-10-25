@@ -1,8 +1,8 @@
-function PlayBackButtons( {onPlay, onStop }) {
+function PlayBackButtons( {onPlay, onStop, onProc }) {
     return (
         <>
             <nav>
-                <button id="process" className="btn btn-outline-primary">Preprocess</button>
+                <button id="process" className="btn btn-outline-primary" onClick={onProc}>Preprocess</button>
                 <button id="process_play" className="btn btn-outline-primary">Proc & Play</button>
                 <br />
                 <button id="play" className="btn btn-outline-primary" onClick={onPlay}>Play</button>

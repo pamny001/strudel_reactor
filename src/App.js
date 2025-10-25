@@ -65,10 +65,17 @@ const handleD3Data = (event) => {
     return replace
 } */
 
+//Process song and check for control settings. 
+function processSong(songText, mode) {
+    const replace = mode === 'HUSH' ? '_' : '';
+    return songText.replaceAll('<p1_Radio>', replace);
+}
+
 export default function StrudelDemo() {
 
 const hasRun = useRef(false);
 
+//Play/Stop button functions
 const playButton = () => {
     globalEditor.evaluate();
 };
@@ -78,6 +85,13 @@ const stopButton = () => {
 };
 
 const [songText, setSongText] = useState(stranger_tune);
+const [mode, setMode] = useState('on');
+
+//Process textfield into code in the strudel textfield.
+const preprocess = () => {
+    const processing = processSong(songText, mode);
+    globalEditor.setCode(processing);
+};
 
 useEffect(() => {
 
@@ -133,7 +147,7 @@ return (
                     </div>
                     <div className="col-md-4">
                         {/*Play/Stop/Preprocess/Proc&Play*/}
-                        <PlayBackButtons onPlay={playButton} onStop={stopButton} />
+                        <PlayBackButtons onPlay={playButton} onStop={stopButton} onProc={preprocess}/>
                     </div>
                 </div>
                 <div className="row">
