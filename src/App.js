@@ -67,8 +67,14 @@ const handleD3Data = (event) => {
 
 //Process song and check for control settings. 
 function processSong(text, controls) {
-    const replacement = controls === 'hush' ? '_' : '';
-    return text.replaceAll('<p1_Radio>', replacement);
+    //Song code before adding controls changes
+    let output = text;
+
+    //Check for hush control and pause <p1_Radio> section
+    const replacement = controls.mode === 'hush' ? '_' : '';
+    output = output.replaceAll('<p1_Radio>', replacement);
+
+    return output;
 }
 
 export default function StrudelDemo() {
@@ -176,7 +182,7 @@ return (
                         <ControlButtons 
                         mode={controls.mode} 
                         bpm={controls.bpm}
-                        onChangeMode={(m) => { procAndPlay(m); }}
+                        onChangeMode={(m) => { setControl(m); procAndPlay(m)}}
                         onChangeBpm={(b) => { setControl('bpm', b); }}
                         />
                     </div>
