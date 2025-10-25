@@ -1,5 +1,5 @@
 import './App.css';
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { StrudelMirror } from '@strudel/codemirror';
 import { evalScope } from '@strudel/core';
 import { drawPianoroll } from '@strudel/draw';
@@ -20,10 +20,10 @@ const handleD3Data = (event) => {
     console.log(event.detail);
 };
 
-export function SetupButtons() {
+/* export function SetupButtons() {
 
-    document.getElementById('play').addEventListener('click', () => globalEditor.evaluate());
-    document.getElementById('stop').addEventListener('click', () => globalEditor.stop());
+    //document.getElementById('play').addEventListener('click', () => globalEditor.evaluate());
+    //document.getElementById('stop').addEventListener('click', () => globalEditor.stop());
     document.getElementById('process').addEventListener('click', () => {
         Proc()
     }
@@ -35,27 +35,27 @@ export function SetupButtons() {
         }
     }
     )
-}
+} */
 
 
 
-export function ProcAndPlay() {
+/* export function ProcAndPlay() {
     if (globalEditor != null && globalEditor.repl.state.started == true) {
         console.log(globalEditor)
         Proc()
         globalEditor.evaluate();
     }
-}
+} */
 
-export function Proc() {
+/* export function Proc() {
 
     let proc_text = document.getElementById('proc').value
     let proc_text_replaced = proc_text.replaceAll('<p1_Radio>', ProcessText);
     ProcessText(proc_text);
     globalEditor.setCode(proc_text_replaced)
-}
+} */
 
-export function ProcessText(match, ...args) {
+/* export function ProcessText(match, ...args) {
 
     let replace = ""
     if (document.getElementById('flexRadioDefault2').checked) {
@@ -63,11 +63,21 @@ export function ProcessText(match, ...args) {
     }
 
     return replace
-}
+} */
 
 export default function StrudelDemo() {
 
 const hasRun = useRef(false);
+
+const playButton = () => {
+    globalEditor.evaluate();
+};
+
+const stopButton = () => {
+    globalEditor.stop();
+};
+
+const [songText, setSongText] = useState(stranger_tune);
 
 useEffect(() => {
 
@@ -103,11 +113,11 @@ useEffect(() => {
             });
             
         document.getElementById('proc').value = stranger_tune
-        SetupButtons()
-        Proc()
+/*         SetupButtons()
+        Proc() */
     }
-
-}, []);
+    globalEditor.setCode(songText);
+}, [songText]);
 
 
 return (
@@ -119,11 +129,11 @@ return (
                 <div className="row">
                     <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
                         {/*Text Field*/}
-                        <TextField />
+                        <TextField defaultValue={songText} onChange={(e) => setSongText(e.target.value)}/>
                     </div>
                     <div className="col-md-4">
                         {/*Play/Stop/Preprocess/Proc&Play*/}
-                        <PlayBackButtons />
+                        <PlayBackButtons onPlay={playButton} onStop={stopButton} />
                     </div>
                 </div>
                 <div className="row">
