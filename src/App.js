@@ -67,7 +67,7 @@ const handleD3Data = (event) => {
 
 //Process song and check for control settings. 
 function processSong(text, mode) {
-    const replacement = mode === 'HUSH' ? '_' : '';
+    const replacement = mode === 'hush' ? '_' : '';
     return text.replaceAll('<p1_Radio>', replacement);
 }
 
@@ -88,14 +88,15 @@ const [songText, setSongText] = useState(stranger_tune);
 const [mode, setMode] = useState('on'); //Default 'on'.
 
 //Process textfield into code in the strudel textfield.
-const preprocess = () => {
-    const processing = processSong(songText, mode);
-    globalEditor.setCode(processing);
+const preprocess = (newMode) => {
+    //const processing = processSong(songText, mode);
+    const processing = newMode ?? mode;
+    globalEditor.setCode(processSong(songText, processing));
 };
 
 //Proc & and play
-const procAndPlay = () => {
-    preprocess();
+const procAndPlay = (newMode) => {
+    preprocess(newMode);
     globalEditor.evaluate();
 }
 
@@ -132,12 +133,13 @@ useEffect(() => {
                 },
             });
             
-        document.getElementById('proc').value = stranger_tune
-/*         SetupButtons()
+        //document.getElementById('proc').value = stranger_tune
+        /*SetupButtons()
         Proc() */
+        globalEditor.setCode(processSong(songText, mode));
     }
-    globalEditor.setCode(songText);
-}, [songText]);
+    globalEditor.setCode(processSong(songText, mode));
+}, [songText, mode]);
 
 
 return (
@@ -163,7 +165,8 @@ return (
                     </div>
                     <div className="col-md-4">
                         {/*On and Hush Buttons*/}
-                        <ControlButtons />
+                        <ControlButtons mode={mode} onChangeMode={(m) => { setMode(m); procAndPlay(m); }}
+/>
                     </div>
                 </div>
             </div>
