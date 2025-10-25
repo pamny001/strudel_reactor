@@ -66,14 +66,24 @@ const handleD3Data = (event) => {
 } */
 
 //Process song and check for control settings. 
-function processSong(text, mode) {
-    const replacement = mode === 'hush' ? '_' : '';
+function processSong(text, controls) {
+    const replacement = controls === 'hush' ? '_' : '';
     return text.replaceAll('<p1_Radio>', replacement);
 }
 
 export default function StrudelDemo() {
 
 const hasRun = useRef(false);
+const [songText, setSongText] = useState(stranger_tune);
+const [controls, setControls] = useState({
+    mode: "on",
+    bpm: 140
+});
+
+//Only replace the control that has changed by keeping the previous value
+const setControl = (key, value) => {
+    setControls(prev => ({ ... prev, [key]: value }));
+};
 
 //Play/Stop button functions
 const playButton = () => {
@@ -84,19 +94,17 @@ const stopButton = () => {
     globalEditor.stop();
 };
 
-const [songText, setSongText] = useState(stranger_tune);
-const [mode, setMode] = useState('on'); //Default 'on'.
-
 //Process textfield into code in the strudel textfield.
-const preprocess = (newMode) => {
-    //const processing = processSong(songText, mode);
-    const processing = newMode ?? mode;
-    globalEditor.setCode(processSong(songText, processing));
+const preprocess = () => {
+    globalEditor.setCode(processSong(songText, controls));
 };
 
 //Proc & and play
 const procAndPlay = (newMode) => {
-    preprocess(newMode);
+    if (newMode) {
+        setControl("mode", newMode);
+    }
+    globalEditor.setCode(processSong(songText, controls));
     globalEditor.evaluate();
 }
 
@@ -136,10 +144,10 @@ useEffect(() => {
         //document.getElementById('proc').value = stranger_tune
         /*SetupButtons()
         Proc() */
-        globalEditor.setCode(processSong(songText, mode));
+        globalEditor.setCode(processSong(songText, controls));
     }
-    globalEditor.setCode(processSong(songText, mode));
-}, [songText, mode]);
+    globalEditor.setCode(processSong(songText, controls));
+}, [songText, controls]);
 
 
 return (
@@ -165,8 +173,12 @@ return (
                     </div>
                     <div className="col-md-4">
                         {/*On and Hush Buttons*/}
-                        <ControlButtons mode={mode} onChangeMode={(m) => { setMode(m); procAndPlay(m); }}
-/>
+                        <ControlButtons 
+                        mode={controls.mode} 
+                        bpm={controls.bpm}
+                        onChangeMode={(m) => { procAndPlay(m); }}
+                        onChangeBpm={(b) => { setControl('bpm', b); }}
+                        />
                     </div>
                 </div>
             </div>

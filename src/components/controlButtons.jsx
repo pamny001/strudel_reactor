@@ -15,6 +15,10 @@ function ControlButtons( {mode = "on", onChangeMode} ) {
                     p1: HUSH
                 </label>
             </div>
+            <div class="input-group">
+                <div class="input-group-text" id="btnGroupAddon">BPM</div>
+                <input type="number" class="form-control" placeholder="Enter BPM" aria-label="BPM Input" aria-describedby="btnGroupAddon" min="40" max="200"/>
+            </div>
         </>
     );
 }
