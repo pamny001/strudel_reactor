@@ -107,10 +107,14 @@ const preprocess = () => {
 
 //Proc & and play
 const procAndPlay = (newMode) => {
+    
+    const nextControls = newMode ? { ...controls, mode: newMode } : controls;
+    
     if (newMode) {
-        setControl("mode", newMode);
+        setControl('mode', newMode);
     }
-    globalEditor.setCode(processSong(songText, controls));
+
+    globalEditor.setCode(processSong(songText, nextControls));
     globalEditor.evaluate();
 }
 
