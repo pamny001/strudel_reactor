@@ -1,20 +1,14 @@
 //import { ProcAndPlay } from "../App";
 import {useState} from "react";
 
-function ControlButtons( {mode = "on", bpm = 120, onChangeMode, onChangeBpm} ) {
+function ControlButtons( {drums2 = "on", bpm = 120, onChangeMode, onChangeBpm} ) {
     const [tempBpm, setTempBpm] = useState(bpm);
     return (
         <>
-            <div className="form-check">
-                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked={mode === "on"} onChange={() => onChangeMode?.("on")} />
-                <label className="form-check-label" htmlFor="flexRadioDefault1">
-                    p1: ON
-                </label>
-            </div>
-            <div className="form-check">
-                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked={mode === "hush"} onChange={() => onChangeMode?.("hush")} />
-                <label className="form-check-label" htmlFor="flexRadioDefault2">
-                    p1: HUSH
+            <div className="form-check form-switch">
+                <input className="form-check-input" type="checkbox" id="flexSwitchCheckMode" checked={drums2 === "on"} onChange={(e) => onChangeMode?.(e.target.checked ? "on" : "off")} />
+                <label className="form-check-label" htmlFor="flexSwitchCheckMode">
+                    Drums 2
                 </label>
             </div>
             <div className="input-group">

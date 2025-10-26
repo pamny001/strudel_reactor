@@ -71,9 +71,16 @@ function processSong(text, controls) {
     let output = text;
 
     //Check for hush control and pause <p1_Radio> section
-    const replacement = controls.mode === 'hush' ? '_' : '';
-    output = output.replaceAll('<p1_Radio>', replacement);
+    //const replacement = controls.drums2 === 'drums2Off' ? '_' : '';
 
+    const switchKeys = ['mainArp', 'bassLine', 'drums1', 'drums2'];
+
+    switchKeys.forEach(key => {
+        const replacement = controls[key] === 'off' ? '_' : '';
+        const placeholder = `<${key}Switch>`;
+        output = output.replaceAll(placeholder, replacement);
+    });
+    
     output = output.replace(/{{\s*BPM\s*}}/g, String(controls.bpm ?? 120));
 
     return output;
@@ -84,7 +91,10 @@ export default function StrudelDemo() {
 const hasRun = useRef(false);
 const [songText, setSongText] = useState(stranger_tune);
 const [controls, setControls] = useState({
-    mode: "on",
+    mainArp: "on",
+    bassLine: "on",
+    drums1: "on",
+    drums2: "on",
     bpm: 140
 });
 
@@ -183,9 +193,9 @@ return (
                     <div className="col-md-4">
                         {/*On and Hush Buttons*/}
                         <ControlButtons 
-                        mode={controls.mode} 
+                        drums2={controls.drums2} 
                         bpm={controls.bpm}
-                        onChangeMode={(m) => { setControl('mode', m)}}
+                        onChangeMode={(m) => { setControl('drums2', m)}}
                         onChangeBpm={(b) => { setControl('bpm', b)}}
                         />
                     </div>
