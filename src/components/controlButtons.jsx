@@ -1,6 +1,8 @@
 //import { ProcAndPlay } from "../App";
+import {useState} from "react";
 
 function ControlButtons( {mode = "on", bpm = 120, onChangeMode, onChangeBpm} ) {
+    const [tempBpm, setTempBpm] = useState(bpm);
     return (
         <>
             <div className="form-check">
@@ -17,8 +19,9 @@ function ControlButtons( {mode = "on", bpm = 120, onChangeMode, onChangeBpm} ) {
             </div>
             <div className="input-group">
                 <div className="input-group-text" id="btnGroupAddon">BPM</div>
-                <input type="number" className="form-control" placeholder="Enter BPM" aria-label="BPM Input" aria-describedby="btnGroupAddon" value={bpm} 
-                onChange={(e) => { onChangeBpm?.(e.target.value); }} />  
+                <input type="number" className="form-control" placeholder="Enter BPM" aria-label="BPM Input" aria-describedby="btnGroupAddon" value={tempBpm} 
+                onChange={(e) => { setTempBpm(e.target.value); }} /> 
+                <button type="button" className="btn btn-primary" onClick={() => { onChangeBpm?.(tempBpm)}}>Set BPM</button>
             </div>
         </>
     );
