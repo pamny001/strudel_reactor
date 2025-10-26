@@ -74,6 +74,8 @@ function processSong(text, controls) {
     const replacement = controls.mode === 'hush' ? '_' : '';
     output = output.replaceAll('<p1_Radio>', replacement);
 
+    output = output.replace(/{{\s*BPM\s*}}/g, String(controls.bpm ?? 120));
+
     return output;
 }
 
@@ -88,7 +90,11 @@ const [controls, setControls] = useState({
 
 //Only replace the control that has changed by keeping the previous value
 const setControl = (key, value) => {
-    setControls(prev => ({ ... prev, [key]: value }));
+    setControls(prev => {const next = { ...prev, [key]: value };
+            globalEditor.setCode(processSong(songText, next));
+            globalEditor.evaluate(); 
+        return next;
+    });
 };
 
 //Play/Stop button functions
@@ -106,15 +112,8 @@ const preprocess = () => {
 };
 
 //Proc & and play
-const procAndPlay = (newMode) => {
-    
-    const nextControls = newMode ? { ...controls, mode: newMode } : controls;
-    
-    if (newMode) {
-        setControl('mode', newMode);
-    }
-
-    globalEditor.setCode(processSong(songText, nextControls));
+const procAndPlay = () => {
+    preprocess();
     globalEditor.evaluate();
 }
 
@@ -186,8 +185,8 @@ return (
                         <ControlButtons 
                         mode={controls.mode} 
                         bpm={controls.bpm}
-                        onChangeMode={(m) => { setControl(m); procAndPlay(m)}}
-                        onChangeBpm={(b) => { setControl('bpm', b); }}
+                        onChangeMode={(m) => { setControl('mode', m)}}
+                        onChangeBpm={(b) => { setControl('bpm', b)}}
                         />
                     </div>
                 </div>

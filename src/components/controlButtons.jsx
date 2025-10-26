@@ -1,6 +1,6 @@
 //import { ProcAndPlay } from "../App";
 
-function ControlButtons( {mode = "on", onChangeMode} ) {
+function ControlButtons( {mode = "on", bpm = 120, onChangeMode, onChangeBpm} ) {
     return (
         <>
             <div className="form-check">
@@ -15,9 +15,10 @@ function ControlButtons( {mode = "on", onChangeMode} ) {
                     p1: HUSH
                 </label>
             </div>
-            <div class="input-group">
-                <div class="input-group-text" id="btnGroupAddon">BPM</div>
-                <input type="number" class="form-control" placeholder="Enter BPM" aria-label="BPM Input" aria-describedby="btnGroupAddon" min="40" max="200"/>
+            <div className="input-group">
+                <div className="input-group-text" id="btnGroupAddon">BPM</div>
+                <input type="number" className="form-control" placeholder="Enter BPM" aria-label="BPM Input" aria-describedby="btnGroupAddon" value={bpm} 
+                onChange={(e) => { onChangeBpm?.(e.target.value); }} />  
             </div>
         </>
     );
