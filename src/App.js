@@ -192,11 +192,9 @@ return (
                     </div>
                     <div className="col-md-4">
                         {/*On and Hush Buttons*/}
-                        <ControlButtons 
-                        drums2={controls.drums2} 
-                        bpm={controls.bpm}
-                        onChangeMode={(m) => { setControl('drums2', m)}}
-                        onChangeBpm={(b) => { setControl('bpm', b)}}
+                        <ControlButtons
+                        controls={controls}
+                        onChangeMode={(key, value) => { setControl(key, value)}}
                         />
                     </div>
                 </div>
