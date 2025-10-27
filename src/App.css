@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+/* Collapsed button blue */
+.collapse-buttons button.btn.collapsed {
+  background-color: #0d6efd; 
+  color: white;
+}
+
+/* Collapsed button green */
+.collapse-buttons button.btn:not(.collapsed) {
+  background-color: #198754;
+  color: white;
+}

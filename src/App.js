@@ -83,6 +83,10 @@ function processSong(text, controls) {
     
     output = output.replace(/{{\s*BPM\s*}}/g, String(controls.bpm ?? 120));
 
+      // CHANGED: Safely clamp volume to 0–1 and replace {{VOLUME}} everywhere
+    const vol = Math.max(0, Math.min(1, Number(controls.volume ?? 0.8))); // CHANGED
+    output = output.replace(/{{\s*VOLUME\s*}}/g, String(vol)); 
+
     return output;
 }
 
@@ -95,7 +99,8 @@ const [controls, setControls] = useState({
     bassLine: "on",
     drums1: "on",
     drums2: "on",
-    bpm: 140
+    bpm: 140,
+    volume: 0.8,
 });
 
 //Only replace the control that has changed by keeping the previous value
