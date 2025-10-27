@@ -8,11 +8,11 @@ function ControlButtons({ controls, onChangeMode, onChangeBpm }) {
   return (
     <>
       <p className="d-inline-flex gap-1 collapse-buttons">
-        <button className="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#speedCollapse" aria-expanded="false" aria-controls="speedCollapse">Speed</button>
-        <button className="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#bassLineCollapse" aria-expanded="false" aria-controls="bassLineCollapse">Bass Line</button>
-        <button className="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#mainArpCollapse" aria-expanded="false" aria-controls="mainArpCollapse">Main Arp</button>
-        <button className="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#drums1Collapse" aria-expanded="false" aria-controls="drums1Collapse">Drums 1</button>
-        <button className="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#drums2Collapse" aria-expanded="false" aria-controls="drums2Collapse">Drums 2</button>
+        <button className="btn btn-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#speedCollapse" aria-expanded="false" aria-controls="speedCollapse">Speed</button>
+        <button className="btn btn-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#bassLineCollapse" aria-expanded="false" aria-controls="bassLineCollapse">Bass Line</button>
+        <button className="btn btn-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#mainArpCollapse" aria-expanded="false" aria-controls="mainArpCollapse">Main Arp</button>
+        <button className="btn btn-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#drums1Collapse" aria-expanded="false" aria-controls="drums1Collapse">Drums 1</button>
+        <button className="btn btn-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#drums2Collapse" aria-expanded="false" aria-controls="drums2Collapse">Drums 2</button>
       </p>
 
       <div className="row">
@@ -45,6 +45,14 @@ function ControlButtons({ controls, onChangeMode, onChangeBpm }) {
                     onChange={(e) => onChangeMode?.("bassLine", e.target.checked ? "on" : "off")} />
                     <label className="form-check-label" htmlFor="flexSwitchCheckMode">Bass Line</label>
                 </div>
+                <div className="mt-3">
+                <label htmlFor="bassLpfControl" className="form-label">Bass Line LPF (200-1500)</label>
+                <input type="range" className="form-range" id="bassLpfControl" min="200" max="1500" step="100"
+                  value={controls.bassLpf ?? 700}
+                  onChange={(e) => onChangeMode?.("bassLpf", parseInt(e.target.value, 10))}
+                />
+                <div className="small text-muted">Current: {controls.bassLpf} Hz</div>
+              </div>
 
             </div>
           </div>

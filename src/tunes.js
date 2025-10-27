@@ -44,7 +44,7 @@ note(pick(basslines, bass))
 .sound("supersaw")
 .postgain(2)
 .room(0.6)
-.lpf(700)
+.lpf({{BASS_LPF}})
 .room(0.4)
 .postgain(pick(gain_patterns, pattern))
 
