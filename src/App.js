@@ -83,6 +83,9 @@ function processSong(text, controls) {
     
     output = output.replace(/{{\s*BPM\s*}}/g, String(controls.bpm ?? 120));
     output = output.replace(/{{\s*BASS_LPF\s*}}/g, String(controls.bassLpf ?? 700));
+    output = output.replace(/{{\s*MAIN_ARP_LPF\s*}}/g, String(controls.mainArpLpf ?? 300));
+    output = output.replace(/{{\s*MAIN_ARP_ROOM\s*}}/g, String(controls.mainArpRoom ?? 0.6));
+    output = output.replace(/{{\s*MAIN_ARP_LPENV\s*}}/g, String(controls.mainArpLpenv ?? 3.3));
 
     return output;
 }
@@ -98,6 +101,9 @@ const [controls, setControls] = useState({
     bassLpf: 700,
 
     mainArp: "on",
+    mainArpLpf: 300,
+    mainArpRoom: 0.6,
+    mainArpLpenv: 3.3,
     
     drums1: "on",
 

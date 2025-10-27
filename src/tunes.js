@@ -52,10 +52,10 @@ note(pick(basslines, bass))
 <mainArpSwitch>main_arp: 
 note(pick(arpeggiator1, "<0 1 2 3>/2"))
 .sound("supersaw")
-.lpf(300)
+.lpf({{MAIN_ARP_LPF}})
 .adsr("0:0:.5:.1")
-.room(0.6)
-.lpenv(3.3)
+.room({{MAIN_ARP_ROOM}})
+.lpenv({{MAIN_ARP_LPENV}})
 .postgain(pick(gain_patterns, pattern))
 
 

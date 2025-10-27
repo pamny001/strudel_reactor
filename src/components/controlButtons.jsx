@@ -46,8 +46,8 @@ function ControlButtons({ controls, onChangeMode, onChangeBpm }) {
                     <label className="form-check-label" htmlFor="flexSwitchCheckMode">Bass Line</label>
                 </div>
                 <div className="mt-3">
-                <label htmlFor="bassLpfControl" className="form-label">Bass Line LPF (200-1500)</label>
-                <input type="range" className="form-range" id="bassLpfControl" min="200" max="1500" step="100"
+                <label htmlFor="bassLpfControl" className="form-label">Bass Line LPF (200-1400)</label>
+                <input type="range" className="form-range" id="bassLpfControl" min="200" max="1400" step="200"
                   value={controls.bassLpf ?? 700}
                   onChange={(e) => onChangeMode?.("bassLpf", parseInt(e.target.value, 10))}
                 />
@@ -69,6 +69,37 @@ function ControlButtons({ controls, onChangeMode, onChangeBpm }) {
                     onChange={(e) => onChangeMode?.("mainArp", e.target.checked ? "on" : "off")} />
                     <label className="form-check-label" htmlFor="flexSwitchCheckMode">Main Arp</label>
                 </div>
+
+                {/* Main Arp LPF slider */}
+                <div className="mt-3">
+                  <label htmlFor="mainArpLpfControl" className="form-label">Main Arp LPF (100-1300)</label>
+                  <input type="range" className="form-range" id="mainArpLpfControl" min="100" max="1300" step="200"
+                    value={controls.mainArpLpf ?? 300}
+                    onChange={(e) => onChangeMode?.("mainArpLpf", parseInt(e.target.value, 10))}
+                  />
+                  <div className="small text-muted">Current: {controls.mainArpLpf ?? 300} Hz</div>
+                </div>
+
+                {/*Main Arp Room slider (0.00–1.00) */}
+                <div className="mt-3">
+                  <label htmlFor="mainArpRoomControl" className="form-label">Main Arp Room (0–1)</label>
+                  <input type="range" className="form-range" id="mainArpRoomControl" min="0" max="1" step="0.01"
+                    value={controls.mainArpRoom ?? 0.6}
+                    onChange={(e) => onChangeMode?.("mainArpRoom", parseFloat(e.target.value))}
+                  />
+                  <div className="small text-muted">Current: {(controls.mainArpRoom ?? 0.6).toFixed(2)}</div>
+                </div>
+
+                {/* Main Arp LPEnv slider (0.0–10.0) */}
+                <div className="mt-3">
+                  <label htmlFor="mainArpLpenvControl" className="form-label">Main Arp LPEnv (0–10)</label>
+                  <input type="range" className="form-range" id="mainArpLpenvControl" min="0" max="10" step="0.1"
+                    value={controls.mainArpLpenv ?? 3.3}
+                    onChange={(e) => onChangeMode?.("mainArpLpenv", parseFloat(e.target.value))}
+                  />
+                  <div className="small text-muted">Current: {(controls.mainArpLpenv ?? 3.3).toFixed(1)}</div>
+                </div>
+
 
             </div>
           </div>
