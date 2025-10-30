@@ -1,10 +1,30 @@
 //import { ProcAndPlay } from "../App";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import { set } from "@strudel/core";
 
 function ControlButtons({ controls, onChangeMode, onChangeBpm }) {
   const [tempBpm, setTempBpm] = useState(controls.bpm);
+
+  //Temp states for sliders
+  const [tempBassLpf, setTempBassLpf] = useState(controls.bassLpf ?? 700);
+  const [tempMainArpLpf, setTempMainArpLpf] = useState(controls.mainArpLpf ?? 300);
+  const [tempMainArpRoom, setTempMainArpRoom] = useState(controls.mainArpRoom ?? 0.6);
+  const [tempMainArpLpenv, setTempMainArpLpenv] = useState(controls.mainArpLpenv ?? 3.3);
+  //Update temp states when controls change
+  useEffect(() => {
+    setTempBpm(controls.bpm);
+    setTempBassLpf(controls.bassLpf ?? 700);
+    setTempMainArpLpf(controls.mainArpLpf ?? 300);
+    setTempMainArpRoom(controls.mainArpRoom ?? 0.6);
+    setTempMainArpLpenv(controls.mainArpLpenv ?? 3.3);
+  }, [controls]);
+  //Commit changes on click release
+  const commitOnRelease = (key, value) => {
+    onChangeMode?.(key, value);
+  };
+
   return (
     <>
       <p className="d-inline-flex gap-1 collapse-buttons">
@@ -48,8 +68,9 @@ function ControlButtons({ controls, onChangeMode, onChangeBpm }) {
                 <div className="mt-3">
                 <label htmlFor="bassLpfControl" className="form-label">Bass Line LPF (200-1400)</label>
                 <input type="range" className="form-range" id="bassLpfControl" min="200" max="1400" step="200"
-                  value={controls.bassLpf ?? 700}
-                  onChange={(e) => onChangeMode?.("bassLpf", parseInt(e.target.value, 10))}
+                  value={tempBassLpf}
+                  onChange={(e) => setTempBassLpf(parseInt(e.target.value, 10))}
+                  onMouseUp={() => commitOnRelease("bassLpf", tempBassLpf)}
                 />
                 <div className="small text-muted">Current: {controls.bassLpf} Hz</div>
               </div>
@@ -74,8 +95,9 @@ function ControlButtons({ controls, onChangeMode, onChangeBpm }) {
                 <div className="mt-3">
                   <label htmlFor="mainArpLpfControl" className="form-label">Main Arp LPF (100-1300)</label>
                   <input type="range" className="form-range" id="mainArpLpfControl" min="100" max="1300" step="200"
-                    value={controls.mainArpLpf ?? 300}
-                    onChange={(e) => onChangeMode?.("mainArpLpf", parseInt(e.target.value, 10))}
+                    value={tempMainArpLpf}
+                    onChange={(e) => setTempMainArpLpf(parseInt(e.target.value, 10))}
+                    onMouseUp={(e) => commitOnRelease("mainArpLpf", tempMainArpLpf)}
                   />
                   <div className="small text-muted">Current: {controls.mainArpLpf ?? 300} Hz</div>
                 </div>
@@ -84,8 +106,9 @@ function ControlButtons({ controls, onChangeMode, onChangeBpm }) {
                 <div className="mt-3">
                   <label htmlFor="mainArpRoomControl" className="form-label">Main Arp Room (0–1)</label>
                   <input type="range" className="form-range" id="mainArpRoomControl" min="0" max="1" step="0.01"
-                    value={controls.mainArpRoom ?? 0.6}
-                    onChange={(e) => onChangeMode?.("mainArpRoom", parseFloat(e.target.value))}
+                    value={tempMainArpRoom}
+                    onChange={(e) => setTempMainArpRoom(parseFloat(e.target.value))}
+                    onMouseUp={(e) => commitOnRelease("mainArpRoom", tempMainArpRoom)}
                   />
                   <div className="small text-muted">Current: {(controls.mainArpRoom ?? 0.6).toFixed(2)}</div>
                 </div>
@@ -94,8 +117,9 @@ function ControlButtons({ controls, onChangeMode, onChangeBpm }) {
                 <div className="mt-3">
                   <label htmlFor="mainArpLpenvControl" className="form-label">Main Arp LPEnv (0–10)</label>
                   <input type="range" className="form-range" id="mainArpLpenvControl" min="0" max="10" step="0.1"
-                    value={controls.mainArpLpenv ?? 3.3}
-                    onChange={(e) => onChangeMode?.("mainArpLpenv", parseFloat(e.target.value))}
+                    value={tempMainArpLpenv}
+                    onChange={(e) => setTempMainArpLpenv(parseFloat(e.target.value))}
+                    onMouseUp={(e) => commitOnRelease("mainArpLpenv", tempMainArpLpenv)}
                   />
                   <div className="small text-muted">Current: {(controls.mainArpLpenv ?? 3.3).toFixed(1)}</div>
                 </div>
