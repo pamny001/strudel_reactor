@@ -13,8 +13,9 @@ import ControlButtons from './components/controlButtons';
 import PlayBackButtons from './components/playBackButtons';
 import StrudelContainer from './components/strudelContainer';
 import TextField from './components/textField';
+import SaveLoadButtons from './components/SaveLoadButtons';
 
-let globalEditor = null;
+export let globalEditor = null;
 
 const handleD3Data = (event) => {
     console.log(event.detail);
@@ -110,6 +111,18 @@ const [controls, setControls] = useState({
     drums2: "on",
 });
 
+const setAppStateLoad = (updateVar) => {
+    const prev = { songText, controls };
+    const next = updateVar(prev)
+    if ('songText' in next) setSongText(next.songText);
+    if ('controls' in next) setControls(next.controls);
+};
+
+const setAppStateReset = (nextObj) => {
+    if ("songText" in nextObj) setSongText(nextObj.songText);
+    if ("controls" in nextObj) setControls(nextObj.controls);
+}
+
 //Only replace the control that has changed by keeping the previous value
 const setControl = (key, value) => {
     setControls(prev => {const next = { ...prev, [key]: value };
@@ -195,6 +208,26 @@ return (
                     <div className="col-md-4">
                         {/*Play/Stop/Preprocess/Proc&Play*/}
                         <PlayBackButtons onPlay={playButton} onStop={stopButton} onProc={preprocess} onProcAndPlay={procAndPlay}/>
+                        <SaveLoadButtons
+                        appState={{
+                            songText,
+                            controls,
+                            defaultSongText: stranger_tune,
+                            defaultControls: {
+                            bpm: 140,
+                            bassLine: "on",
+                            bassLpf: 700,
+                            mainArp: "on",
+                            mainArpLpf: 300,
+                            mainArpRoom: 0.6,
+                            mainArpLpenv: 3.3,
+                            drums1: "on",
+                            drums2: "on",
+                            },
+                        }}
+                        setAppStateLoad={setAppStateLoad}
+                        setAppStateReset={setAppStateReset}
+                        />
                     </div>
                 </div>
                 <div className="row">
