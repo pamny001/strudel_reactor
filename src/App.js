@@ -142,15 +142,15 @@ const stopButton = () => {
 };
 
 //Process textfield into code in the strudel textfield.
-const preprocess = () => {
-    globalEditor.setCode(processSong(songText, controls));
-};
+//const preprocess = () => {
+//    globalEditor.setCode(processSong(songText, controls));
+//};
 
 //Proc & and play
-const procAndPlay = () => {
-    preprocess();
-    globalEditor.evaluate();
-}
+//const procAndPlay = () => {
+//    preprocess();
+//    globalEditor.evaluate();
+//}
 
 useEffect(() => {
 
@@ -207,7 +207,7 @@ return (
                     </div>
                     <div className="col-md-4">
                         {/*Play/Stop/Preprocess/Proc&Play*/}
-                        <PlayBackButtons onPlay={playButton} onStop={stopButton} onProc={preprocess} onProcAndPlay={procAndPlay}/>
+                        <PlayBackButtons onPlay={playButton} onStop={stopButton}/>
                         <SaveLoadButtons
                         appState={{
                             songText,
