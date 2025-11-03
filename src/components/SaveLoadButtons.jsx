@@ -16,7 +16,7 @@ export default function SaveLoadButtons({ appState, setAppStateLoad, setAppState
   const handleLoad = () => {
     try {
       const raw = localStorage.getItem("app_state");
-      if (!raw) return; // no saved state
+      if (!raw) return;
       const loaded = JSON.parse(raw);
       setAppStateLoad(prev => ({ ...prev, ...loaded })); // merges
       globalEditor.setCode(loaded.songText);
