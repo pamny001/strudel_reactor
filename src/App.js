@@ -116,11 +116,28 @@ const setAppStateLoad = (updateVar) => {
     const next = updateVar(prev)
     if ('songText' in next) setSongText(next.songText);
     if ('controls' in next) setControls(next.controls);
+
+    //Store next values for before sending to strudel console
+    const nextSong = 'songText' in next ? next.songText : songText;
+    const nextControls = 'controls' in next ? next.controls : controls;
+
+    //Plays the changes made on load immediately
+    globalEditor.setCode(processSong(nextSong, nextControls));
+    globalEditor.evaluate();
+
 };
 
 const setAppStateReset = (nextObj) => {
     if ("songText" in nextObj) setSongText(nextObj.songText);
     if ("controls" in nextObj) setControls(nextObj.controls);
+
+    //Store default values
+    const nextSong = "songText" in nextObj ? nextObj.songText : songText;
+    const nextControls = "controls" in nextObj ? nextObj.controls : controls;
+
+    //Plays the changes made on reset immediately
+    globalEditor.setCode(processSong(nextSong, nextControls));
+    globalEditor.evaluate();
 }
 
 //Only replace the control that has changed by keeping the previous value

@@ -19,8 +19,6 @@ export default function SaveLoadButtons({ appState, setAppStateLoad, setAppState
       if (!raw) return;
       const loaded = JSON.parse(raw);
       setAppStateLoad(prev => ({ ...prev, ...loaded })); // merges
-      globalEditor.setCode(loaded.songText);
-      globalEditor.evaluate();
 
       console.log("state loaded");
     } catch (e) {
@@ -36,9 +34,6 @@ export default function SaveLoadButtons({ appState, setAppStateLoad, setAppState
     };
 
     setAppStateReset(resetData);
-
-    globalEditor.setCode(resetData.songText);
-    globalEditor.evaluate();
 
     console.log("State reset to defaults");
   };
