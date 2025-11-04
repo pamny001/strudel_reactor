@@ -9,6 +9,10 @@ import CollapseButtons from "./controls/CollapseButtons.jsx";
 import SpeedSection from "./controls/SpeedSection.jsx";
 import BassLineSection from "./controls/BassLineSection.jsx";
 import MainArpSection from "./controls/MainArpSection.jsx";
+import DrumsOneSection from "./controls/DrumsOneSection.jsx";
+import DrumsTwoSection from "./controls/DrumsTwoSection.jsx";
+
+
 
 function ControlButtons({ controls, onChangeMode, onChangeBpm }) {
   const [tempBpm, setTempBpm] = useState(controls.bpm);
@@ -73,37 +77,19 @@ function ControlButtons({ controls, onChangeMode, onChangeBpm }) {
 
         { /* Drums1 */}
         <div className="col-12 mb-3">
-          <div className="collapse" id="drums1Collapse">
-            <div className="card card-body">
-
-                <h5 className="text-center">Drums 1 Controls</h5>
-                <div className="form-check form-switch">
-                    <input className="form-check-input" type="checkbox" id="flexSwitchCheckMode" checked={controls.drums1 === "on"} 
-                    onChange={(e) => onChangeMode?.("drums1", e.target.checked ? "on" : "off")} />
-                    <label className="form-check-label" htmlFor="flexSwitchCheckMode">Drums 1 Switch</label>
-                </div>
-
-            </div>
-          </div>
+          <DrumsOneSection
+            controls={controls}
+            onChangeMode={onChangeMode}
+          />
         </div>
 
         { /* Drums2 */}
         <div className="col-12 mb-3">
-          <div className="collapse" id="drums2Collapse">
-            <div className="card card-body">
-
-                <h5 className="text-center">Drums 2 Controls</h5>
-                <div className="form-check form-switch">
-                    <input className="form-check-input" type="checkbox" id="flexSwitchCheckMode" checked={controls.drums2 === "on"} 
-                    onChange={(e) => onChangeMode?.("drums2", e.target.checked ? "on" : "off")} />
-                    <label className="form-check-label" htmlFor="flexSwitchCheckMode">Drums 2 Switch</label>
-                </div>
-
-            </div>
-          </div>
+          <DrumsTwoSection
+            controls={controls}
+            onChangeMode={onChangeMode}
+          />
         </div>
-
-
       </div>
     </>
   );
