@@ -224,27 +224,28 @@ return (
                     </div>
                     <div className="col-md-4">
                         {/*Play/Stop/Preprocess/Proc&Play*/}
-                        <PlayBackButtons onPlay={playButton} onStop={stopButton}/>
-                        <SaveLoadButtons
-                        appState={{
-                            songText,
-                            controls,
-                            defaultSongText: stranger_tune,
-                            defaultControls: {
-                            bpm: 140,
-                            bassLine: "on",
-                            bassLpf: 700,
-                            mainArp: "on",
-                            mainArpLpf: 300,
-                            mainArpRoom: 0.6,
-                            mainArpLpenv: 3.3,
-                            drums1: "on",
-                            drums2: "on",
-                            },
-                        }}
-                        setAppStateLoad={setAppStateLoad}
-                        setAppStateReset={setAppStateReset}
-                        />
+                        <PlayBackButtons onPlay={playButton} onStop={stopButton}>
+                            <SaveLoadButtons
+                                appState={{
+                                    songText,
+                                    controls,
+                                    defaultSongText: stranger_tune,
+                                    defaultControls: {
+                                    bpm: 140,
+                                    bassLine: "on",
+                                    bassLpf: 700,
+                                    mainArp: "on",
+                                    mainArpLpf: 300,
+                                    mainArpRoom: 0.6,
+                                    mainArpLpenv: 3.3,
+                                    drums1: "on",
+                                    drums2: "on",
+                                    },
+                                }}
+                                setAppStateLoad={setAppStateLoad}
+                                setAppStateReset={setAppStateReset}
+                            />
+                        </PlayBackButtons>
                     </div>
                 </div>
                 <div className="row">

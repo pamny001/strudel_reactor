@@ -39,10 +39,10 @@ export default function SaveLoadButtons({ appState, setAppStateLoad, setAppState
   };
 
   return (
-    <div>
-      <button onClick={handleSave}>Save</button>
-      <button onClick={handleLoad}>Load</button>
-      <button onClick={handleReset}>Reset</button>
-    </div>
+    <>
+      <button className="btn btn-outline-success me-2" onClick={handleSave}>Save</button>
+      <button className="btn btn-outline-success me-2" onClick={handleLoad}>Load</button>
+      <button className="btn btn-danger me-2" onClick={handleReset}>Reset</button>
+    </>
   );
 }

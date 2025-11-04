@@ -1,9 +1,10 @@
-function PlayBackButtons( {onPlay, onStop, onProc, onProcAndPlay }) {
+function PlayBackButtons( {onPlay, onStop, children }) {
     return (
         <>
             <nav>
-                <button id="play" className="btn btn-outline-primary" onClick={onPlay}>Play</button>
-                <button id="stop" className="btn btn-outline-primary" onClick={onStop}>Stop</button>
+                <button id="play" className="btn btn-success me-2" onClick={onPlay}>Play</button>
+                <button id="stop" className="btn btn-danger me-2" onClick={onStop}>Stop</button>
+                {children}
             </nav>
         </>
     );
