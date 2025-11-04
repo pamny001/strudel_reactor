@@ -3,7 +3,7 @@ function PlayBackButtons( {onPlay, onStop, children }) {
         <>
             <nav>
                 <button id="play" className="btn btn-success me-2" onClick={onPlay}>Play</button>
-                <button id="stop" className="btn btn-danger me-2" onClick={onStop}>Stop</button>
+                <button id="stop" className="btn btn-danger me-5" onClick={onStop}>Stop</button>
                 {children}
             </nav>
         </>
