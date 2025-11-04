@@ -6,8 +6,8 @@ import { set } from "@strudel/core";
 
 //Component imports
 import CollapseButtons from "./controls/CollapseButtons.jsx";
-import SpeedSection from "./controls/SpeedSection.jsx";           // [MODULARIZATION - ADDED]
-
+import SpeedSection from "./controls/SpeedSection.jsx";
+import BassLineSection from "./controls/BassLineSection.jsx";
 
 function ControlButtons({ controls, onChangeMode, onChangeBpm }) {
   const [tempBpm, setTempBpm] = useState(controls.bpm);
@@ -46,30 +46,16 @@ function ControlButtons({ controls, onChangeMode, onChangeBpm }) {
 
         { /* Bass Line */ }
         <div className="col-12 mb-3">
-          <div className="collapse" id="bassLineCollapse">
-            <div className="card card-body">
-
-                <h5 className="text-center">Bass Line Controls</h5>
-                <div className="form-check form-switch">
-                    <input className="form-check-input" type="checkbox" id="flexSwitchCheckMode" checked={controls.bassLine === "on"} 
-                    onChange={(e) => onChangeMode?.("bassLine", e.target.checked ? "on" : "off")} />
-                    <label className="form-check-label" htmlFor="flexSwitchCheckMode">Bass Line Switch</label>
-                </div>
-                <div>
-                <label htmlFor="bassLpfControl" className="form-label">Bass Line LPF (200-1400)</label>
-                <input type="range" className="form-range" id="bassLpfControl" min="200" max="1400" step="200"
-                  value={tempBassLpf}
-                  onChange={(e) => setTempBassLpf(parseInt(e.target.value, 10))}
-                  onMouseUp={() => commitOnRelease("bassLpf", tempBassLpf)}
-                />
-                <div className="small text-muted">Current: {controls.bassLpf} Hz</div>
-              </div>
-
-            </div>
-          </div>
+          <BassLineSection
+            controls={controls}
+            tempBassLpf={tempBassLpf}
+            setTempBassLpf={setTempBassLpf}
+            commitOnRelease={commitOnRelease}
+            onChangeMode={onChangeMode}
+          />
         </div>
 
-                {/* Main Arp */}
+        {/* Main Arp */}
         <div className="col-12 mb-3">
           <div className="collapse" id="mainArpCollapse">
             <div className="card card-body">
