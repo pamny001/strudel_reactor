@@ -5,7 +5,9 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { set } from "@strudel/core";
 
 //Component imports
-import CollapseButtons from "./CollapseButtons.jsx";
+import CollapseButtons from "./controls/CollapseButtons.jsx";
+import SpeedSection from "./controls/SpeedSection.jsx";           // [MODULARIZATION - ADDED]
+
 
 function ControlButtons({ controls, onChangeMode, onChangeBpm }) {
   const [tempBpm, setTempBpm] = useState(controls.bpm);
@@ -35,20 +37,11 @@ function ControlButtons({ controls, onChangeMode, onChangeBpm }) {
       <div className="row">
         {/* Speed Section */}
         <div className="col-12 mb-3">
-          <div className="collapse" id="speedCollapse">
-            <div className="card card-body">
-
-            <h5 className="text-center">Speed</h5>
-              <div className="input-group">
-                <div className="input-group-text" id="btnGroupAddon">BPM</div>
-                <input type="number" className="form-control" placeholder="Enter BPM" aria-label="BPM Input" aria-describedby="btnGroupAddon" 
-                value={tempBpm} 
-                onChange={(e) => { setTempBpm(e.target.value); }} />
-                <button type="button" className="btn btn-primary" onClick={() => { onChangeMode?.("bpm", tempBpm)}}>Set BPM</button>
-              </div>
-
-            </div>
-          </div>
+          <SpeedSection
+            tempBpm={tempBpm}
+            setTempBpm={setTempBpm}
+            onChangeMode={onChangeMode}
+          />
         </div>
 
         { /* Bass Line */ }
