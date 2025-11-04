@@ -4,6 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { set } from "@strudel/core";
 
+//Component imports
+import CollapseButtons from "./CollapseButtons.jsx";
+
 function ControlButtons({ controls, onChangeMode, onChangeBpm }) {
   const [tempBpm, setTempBpm] = useState(controls.bpm);
 
@@ -27,13 +30,7 @@ function ControlButtons({ controls, onChangeMode, onChangeBpm }) {
 
   return (
     <>
-      <p className="d-inline-flex gap-1 collapse-buttons">
-        <button className="btn btn-outline-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#speedCollapse" aria-expanded="false" aria-controls="speedCollapse">Speed</button>
-        <button className="btn btn-outline-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#bassLineCollapse" aria-expanded="false" aria-controls="bassLineCollapse">Bass Line</button>
-        <button className="btn btn-outline-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#mainArpCollapse" aria-expanded="false" aria-controls="mainArpCollapse">Main Arp</button>
-        <button className="btn btn-outline-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#drums1Collapse" aria-expanded="false" aria-controls="drums1Collapse">Drums 1</button>
-        <button className="btn btn-outline-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#drums2Collapse" aria-expanded="false" aria-controls="drums2Collapse">Drums 2</button>
-      </p>
+      <CollapseButtons />
 
       <div className="row">
         {/* Speed Section */}
