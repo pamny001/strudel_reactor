@@ -171,49 +171,51 @@ return (
         <h2 className="text-center">Strudel Demo</h2>
         <main>
 
-            <div className="container-fluid">
-                <div className="row">
-                    <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
-                        {/*Text Field*/}
-                        <TextField defaultValue={songText} onChange={(e) => setSongText(e.target.value)}/>
+            <div className="container">
+                <div className='row'>
+                    <div className='col-7'>
+                        <div style={{ maxHeight: '50vh', overflowY: 'auto' }}>
+                            {/*Text Field*/}
+                            <TextField defaultValue={songText} onChange={(e) => setSongText(e.target.value)}/>
+                        </div>
+                        <div style={{ maxHeight: '50vh', overflowY: 'auto' }}>
+                            {/*Strudel container*/}
+                            <StrudelContainer />
+                        </div>
                     </div>
-                    <div className="col-md-4">
-                        {/*Play/Stop/Preprocess/Proc&Play*/}
-                        <PlayBackButtons onPlay={playButton} onStop={stopButton}>
-                        <SaveLoadButtons
-                        appState={{
-                            songText,
-                            controls,
-                            defaultSongText: stranger_tune,
-                            defaultControls: {
-                            bpm: 140,
-                            bassLine: "on",
-                            bassLpf: 700,
-                            mainArp: "on",
-                            mainArpLpf: 300,
-                            mainArpRoom: 0.6,
-                            mainArpLpenv: 3.3,
-                            drums1: "on",
-                            drums2: "on",
-                            },
-                        }}
-                        setAppStateLoad={setAppStateLoad}
-                        setAppStateReset={setAppStateReset}
-                        />
-                        </PlayBackButtons> 
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
-                        {/*Strudel container*/}
-                        <StrudelContainer />
-                    </div>
-                    <div className="col-md-4">
-                        {/*On and Hush Buttons*/}
-                        <ControlButtons
-                        controls={controls}
-                        onChangeMode={(key, value) => { setControl(key, value)}}
-                        />
+                    <div className='col-5'>
+                        <div>
+                            {/*Play/Stop/Preprocess/Proc&Play*/}
+                            <PlayBackButtons onPlay={playButton} onStop={stopButton}>
+                            <SaveLoadButtons
+                            appState={{
+                                songText,
+                                controls,
+                                defaultSongText: stranger_tune,
+                                defaultControls: {
+                                bpm: 140,
+                                bassLine: "on",
+                                bassLpf: 700,
+                                mainArp: "on",
+                                mainArpLpf: 300,
+                                mainArpRoom: 0.6,
+                                mainArpLpenv: 3.3,
+                                drums1: "on",
+                                drums2: "on",
+                                },
+                            }}
+                            setAppStateLoad={setAppStateLoad}
+                            setAppStateReset={setAppStateReset}
+                            />
+                            </PlayBackButtons> 
+                        </div>
+                        <div className='mt-2'>
+                            {/*On and Hush Buttons*/}
+                            <ControlButtons
+                            controls={controls}
+                            onChangeMode={(key, value) => { setControl(key, value)}}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
