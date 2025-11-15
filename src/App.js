@@ -14,6 +14,9 @@ import PlayBackButtons from './components/playBackButtons';
 import StrudelContainer from './components/strudelContainer';
 import TextField from './components/textField';
 import SaveLoadButtons from './components/SaveLoadButtons';
+import Graph from './components/Graph'
+
+import * as d3 from 'd3'
 
 export let globalEditor = null;
 
@@ -189,6 +192,7 @@ return (
                                 <div style={{ maxHeight: '50vh', overflowY: 'auto' }}>
                                     {/*Strudel container*/}
                                     <StrudelContainer />
+                                    <Graph/>
                                 </div>
                             </div>
                             <div className='col-5'>
@@ -235,7 +239,6 @@ return (
 
     </div>
 );
-
 
 
 }
