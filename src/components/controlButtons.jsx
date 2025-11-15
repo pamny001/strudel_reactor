@@ -12,8 +12,6 @@ import MainArpSection from "./controls/MainArpSection.jsx";
 import DrumsOneSection from "./controls/DrumsOneSection.jsx";
 import DrumsTwoSection from "./controls/DrumsTwoSection.jsx";
 
-
-
 function ControlButtons({ controls, onChangeMode, onChangeBpm }) {
   const [tempBpm, setTempBpm] = useState(controls.bpm);
 
