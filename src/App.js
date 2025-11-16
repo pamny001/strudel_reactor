@@ -15,6 +15,7 @@ import StrudelContainer from './components/strudelContainer';
 import TextField from './components/textField';
 import SaveLoadButtons from './components/SaveLoadButtons';
 import Graph from './components/Graph'
+import StrudelLogo from './StrudelLogo.png';
 
 import * as d3 from 'd3'
 
@@ -203,7 +204,8 @@ return (
         >
             <div className="col-10">
 
-                <h2 className="text-center mb-4">Strudel Demo</h2>
+                <img classname="mb-5" src={StrudelLogo} alt="Strudel Demo Logo" 
+                style={{ width: '200px', display: 'block', margin: '0 auto' }}/>
 
                 <main style={{ backgroundColor: '#f7e8d8', padding: '20px', borderRadius: '10px' }}> 
                     
@@ -212,12 +214,12 @@ return (
                             <div className='col-7'>
                                 <div style={{ maxHeight: '50vh', overflowY: 'auto' }}>
                                     {/*Text Field*/}
-                                    <TextField defaultValue={songText} onChange={(e) => setSongText(e.target.value)}/>
+                                    {/*<TextField defaultValue={songText} onChange={(e) => setSongText(e.target.value)}/>*/}
+                                    <Graph/>
                                 </div>
                                 <div style={{ maxHeight: '50vh', overflowY: 'auto' }}>
                                     {/*Strudel container*/}
                                     <StrudelContainer />
-                                    <Graph/>
                                 </div>
                             </div>
                             <div className='col-5'>
@@ -281,7 +283,7 @@ return (
                                 </div>
                             </div>
                         </div>
-                        <canvas id="roll"></canvas>
+                        <canvas id="roll" style={{ display: 'none' }}></canvas> 
                     </div>
 
                 </main>
