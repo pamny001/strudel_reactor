@@ -47,7 +47,7 @@ note(pick(basslines, bass))
 .lpf({{BASS_LPF}})
 .room(0.4)
 .postgain(pick(gain_patterns, pattern))
-.gain(1) //Added
+.gain({{VOLUME}}) //Added
 
 
 <mainArpSwitch>main_arp: 
@@ -58,6 +58,7 @@ note(pick(arpeggiator1, "<0 1 2 3>/2"))
 .room({{MAIN_ARP_ROOM}})
 .lpenv({{MAIN_ARP_LPENV}})
 .postgain(pick(gain_patterns, pattern))
+.gain({{VOLUME}}) //Added
 
 
 <drums1Switch>drums:
@@ -66,29 +67,31 @@ stack(
   .postgain(6)
   .pcurve(2)
   .pdec(1)
+  .gain({{VOLUME}}) //Added
   .struct(pick(drum_structure, pattern)),
 
   s("sh").struct("[x!3 ~!2 x!10 ~]")
   .postgain(0.5).lpf(7000)
   .bank("RolandTR808")
-  .speed(0.8).jux(rev).room(sine.range(0.1,0.4)).gain(0.6),
+  .speed(0.8).jux(rev).room(sine.range(0.1,0.4)).gain(0.6*{{VOLUME}}),
 
   s("{~ ~ rim ~ cp ~ rim cp ~!2 rim ~ cp ~ < rim ~ >!2}%8 *2")
   .bank("[KorgDDM110, OberheimDmx]").speed(1.2)
+  .gain({{VOLUME}}) //Added
   .postgain({{DRUMS_1_KICK}}),
 )
 
 <drums2Switch>drums2: 
 stack(
-  s("[~ hh]*4").bank("RolandTR808").room(0.3).speed(0.75).gain(1.2),
+  s("[~ hh]*4").bank("RolandTR808").room(0.3).speed(0.75).gain(1.2*{{VOLUME}}),
   s("hh").struct("x*16").bank("RolandTR808")
-  .gain(0.6)
+  .gain(0.6*{{VOLUME}})
   .jux(rev)
   .room(sine.range(0.1,0.4))
   .postgain(0.5),
   
   s("[psr:[2|5|6|7|8|9|12|24|25]*16]?0.1")
-  .gain(0.1)
+  .gain(0.1*{{VOLUME}})
   .postgain(pick(gain_patterns, pattern))
   .hpf({{DRUMS_2_HPF}})
   .speed(0.5)

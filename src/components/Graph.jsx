@@ -10,8 +10,8 @@ function Graph() {
     const [eventCount, setEventCount] = useState(0);
 
     const maxItems = 20; //Max bars
-    const maxValue = 0.55;
-    const minValue = 0.48;
+    const maxValue = 1.45;
+    const minValue = 0;
 
     // Listen for d3Data events from Strudel
     useEffect(() => {

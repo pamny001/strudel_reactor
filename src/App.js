@@ -52,6 +52,8 @@ function processSong(text, controls) {
     output = output.replace(/{{\s*DRUMS_1_KICK\s*}}/g, String(controls.drums1Kick ?? 0.25));
     //Drums2
     output = output.replace(/{{\s*DRUMS_2_HPF\s*}}/g, String(controls.drums2Hpf ?? 1000));
+    //Global volume
+    output = output.replace(/{{\s*VOLUME\s*}}/g, String(controls.volume ?? 1));
 
     return output;
 }
@@ -75,8 +77,17 @@ const [controls, setControls] = useState({
     drums1Kick: 0.25,
 
     drums2: "on",
-     drums2Hpf: 1000
+    drums2Hpf: 1000,
+
+    volume: 1
 });
+
+const [isPlaying, setIsPlaying] = useState(false);
+const [tempVolume, setTempVolume] = useState(controls.volume ?? 1);
+
+useEffect(() => {
+    setTempVolume(controls.volume ?? 1);
+}, [controls.volume]);
 
 const setAppStateLoad = (updateVar) => {
     const prev = { songText, controls };
@@ -109,9 +120,12 @@ const setAppStateReset = (nextObj) => {
 
 //Only replace the control that has changed by keeping the previous value
 const setControl = (key, value) => {
-    setControls(prev => {const next = { ...prev, [key]: value };
-            globalEditor.setCode(processSong(songText, next));
-            globalEditor.evaluate(); 
+    setControls(prev => {
+        const next = { ...prev, [key]: value };
+        globalEditor.setCode(processSong(songText, next));
+        if (isPlaying) {            
+            globalEditor.evaluate();
+        }                       
         return next;
     });
 };
@@ -119,10 +133,12 @@ const setControl = (key, value) => {
 //Play/Stop button functions
 const playButton = () => {
     globalEditor.evaluate();
+    setIsPlaying(true);
 };
 
 const stopButton = () => {
     globalEditor.stop();
+    setIsPlaying(false);
 };
 
 //Process textfield into code in the strudel textfield.
@@ -224,7 +240,8 @@ return (
                                                     drums1: "on",
                                                     drums1Kick: 0.25,
                                                     drums2: "on",
-                                                    drums2Hpf: 1000
+                                                    drums2Hpf: 1000,
+                                                    volume: 1
                                                 },
                                             }}
                                             setAppStateLoad={setAppStateLoad}
@@ -232,6 +249,29 @@ return (
                                         />
                                     </PlayBackButtons> 
                                 </div>
+
+                                <div className="card mt-2">
+                                <div className="card-body">
+                                    <label htmlFor="volumeControl" className="form-label">
+                                    Volume
+                                    </label>
+                                    <input
+                                    type="range"
+                                    className="form-range"
+                                    id="volumeControl"
+                                    min="0"
+                                    max="2"
+                                    step="0.01"
+                                    value={tempVolume}
+                                    onChange={(e) => setTempVolume(parseFloat(e.target.value))}
+                                    onMouseUp={() => setControl("volume", tempVolume)}
+                                    />
+                                    <div className="small text-muted">
+                                    Current: {(controls.volume ?? 1).toFixed(2)}
+                                    </div>
+                                </div>
+                                </div>
+
                                 <div className='mt-2'>
                                     {/*On and Hush Buttons*/}
                                     <ControlButtons
