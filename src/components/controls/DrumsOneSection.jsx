@@ -1,6 +1,9 @@
 export default function DrumsOneSection({ 
     controls, 
-    onChangeMode 
+    onChangeMode,
+    tempDrums1Kick,
+    setTempDrums1Kick,
+    commitOnRelease
 
 }) {
   return (
@@ -12,6 +15,27 @@ export default function DrumsOneSection({
                 onChange={(e) => onChangeMode?.("drums1", e.target.checked ? "on" : "off")} />
                 <label className="form-check-label" htmlFor="flexSwitchCheckMode">Drums 1 Switch</label>
             </div>
+
+            <div className="mt-2">
+              <label htmlFor="drums1KickControl" className="form-label">
+                Drums 1 Kick Level (0–1)
+              </label>
+              <input
+                type="range"
+                className="form-range"
+                id="drums1KickControl"
+                min="0"
+                max="1"
+                step="0.01"
+                value={tempDrums1Kick}
+                onChange={(e) => setTempDrums1Kick(parseFloat(e.target.value))}
+                onMouseUp={() => commitOnRelease("drums1Kick", tempDrums1Kick)}
+              />
+              <div className="small text-muted">
+                Current: {(controls.drums1Kick ?? 0.25).toFixed(2)}
+              </div>
+          </div>
+
         </div>
     </div>
   );

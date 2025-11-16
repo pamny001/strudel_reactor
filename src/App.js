@@ -40,11 +40,18 @@ function processSong(text, controls) {
         output = output.replaceAll(placeholder, replacement);
     });
     
+    //BPM
     output = output.replace(/{{\s*BPM\s*}}/g, String(controls.bpm ?? 120));
+    //Bass
     output = output.replace(/{{\s*BASS_LPF\s*}}/g, String(controls.bassLpf ?? 700));
+    //Main Arp
     output = output.replace(/{{\s*MAIN_ARP_LPF\s*}}/g, String(controls.mainArpLpf ?? 300));
     output = output.replace(/{{\s*MAIN_ARP_ROOM\s*}}/g, String(controls.mainArpRoom ?? 0.6));
     output = output.replace(/{{\s*MAIN_ARP_LPENV\s*}}/g, String(controls.mainArpLpenv ?? 3.3));
+    //Drums
+    output = output.replace(/{{\s*DRUMS_1_KICK\s*}}/g, String(controls.drums1Kick ?? 0.25));
+    //Drums2
+    output = output.replace(/{{\s*DRUMS_2_HPF\s*}}/g, String(controls.drums2Hpf ?? 1000));
 
     return output;
 }
@@ -65,8 +72,10 @@ const [controls, setControls] = useState({
     mainArpLpenv: 3.3,
     
     drums1: "on",
+    drums1Kick: 0.25,
 
     drums2: "on",
+     drums2Hpf: 1000
 });
 
 const setAppStateLoad = (updateVar) => {
@@ -213,7 +222,9 @@ return (
                                                     mainArpRoom: 0.6,
                                                     mainArpLpenv: 3.3,
                                                     drums1: "on",
+                                                    drums1Kick: 0.25,
                                                     drums2: "on",
+                                                    drums2Hpf: 1000
                                                 },
                                             }}
                                             setAppStateLoad={setAppStateLoad}

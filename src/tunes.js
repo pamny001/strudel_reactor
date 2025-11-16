@@ -47,6 +47,7 @@ note(pick(basslines, bass))
 .lpf({{BASS_LPF}})
 .room(0.4)
 .postgain(pick(gain_patterns, pattern))
+.gain(1) //Added
 
 
 <mainArpSwitch>main_arp: 
@@ -74,7 +75,7 @@ stack(
 
   s("{~ ~ rim ~ cp ~ rim cp ~!2 rim ~ cp ~ < rim ~ >!2}%8 *2")
   .bank("[KorgDDM110, OberheimDmx]").speed(1.2)
-  .postgain(.25),
+  .postgain({{DRUMS_1_KICK}}),
 )
 
 <drums2Switch>drums2: 
@@ -89,12 +90,12 @@ stack(
   s("[psr:[2|5|6|7|8|9|12|24|25]*16]?0.1")
   .gain(0.1)
   .postgain(pick(gain_patterns, pattern))
-  .hpf(1000)
+  .hpf({{DRUMS_2_HPF}})
   .speed(0.5)
   .rarely(jux(rev)),
 )
 //Remixed and reproduced from Algorave Dave's code found here: https://www.youtube.com/watch?v=ZCcpWzhekEY
 // all(x => x.gain(mouseX.range(0,1)))
-// all(x => x.log())
+all(x => x.log())
 
 // @version 1.2`;

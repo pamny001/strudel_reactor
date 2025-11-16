@@ -27,7 +27,7 @@ export default function MainArpSection({
 
         {/* Main Arp LPF slider */}
         <div>
-          <label htmlFor="mainArpLpfControl" className="form-label">Main Arp LPF (100-1300)</label>
+          <label htmlFor="mainArpLpfControl" className="form-label mt-2">Main Arp LPF (100-1300)</label>
           <input
             type="range"
             className="form-range"
@@ -44,7 +44,7 @@ export default function MainArpSection({
 
         {/* Main Arp Room slider (0–1) */}
         <div>
-          <label htmlFor="mainArpRoomControl" className="form-label">Main Arp Room (0–1)</label>
+          <label htmlFor="mainArpRoomControl" className="form-label mt-2">Main Arp Room (0–1)</label>
           <input
             type="range"
             className="form-range"
@@ -61,7 +61,7 @@ export default function MainArpSection({
 
         {/* Main Arp LPEnv slider (0–10) */}
         <div>
-          <label htmlFor="mainArpLpenvControl" className="form-label">Main Arp LPEnv (0–10)</label>
+          <label htmlFor="mainArpLpenvControl" className="form-label mt-2">Main Arp LPEnv (0–10)</label>
           <input
             type="range"
             className="form-range"

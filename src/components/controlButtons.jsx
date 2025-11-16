@@ -20,6 +20,8 @@ function ControlButtons({ controls, onChangeMode, onChangeBpm }) {
   const [tempMainArpLpf, setTempMainArpLpf] = useState(controls.mainArpLpf ?? 300);
   const [tempMainArpRoom, setTempMainArpRoom] = useState(controls.mainArpRoom ?? 0.6);
   const [tempMainArpLpenv, setTempMainArpLpenv] = useState(controls.mainArpLpenv ?? 3.3);
+  const [tempDrums1Kick, setTempDrums1Kick] = useState(controls.drums1Kick ?? 0.25);
+  const [tempDrums2Hpf, setTempDrums2Hpf] = useState(controls.drums2Hpf ?? 1000);
   //Update temp states when controls change
   useEffect(() => {
     setTempBpm(controls.bpm);
@@ -27,6 +29,8 @@ function ControlButtons({ controls, onChangeMode, onChangeBpm }) {
     setTempMainArpLpf(controls.mainArpLpf ?? 300);
     setTempMainArpRoom(controls.mainArpRoom ?? 0.6);
     setTempMainArpLpenv(controls.mainArpLpenv ?? 3.3);
+    setTempDrums1Kick(controls.drums1Kick ?? 0.25);
+    setTempDrums2Hpf(controls.drums2Hpf ?? 1000);
   }, [controls]);
   //Commit changes on click release
   const commitOnRelease = (key, value) => {
@@ -78,6 +82,9 @@ function ControlButtons({ controls, onChangeMode, onChangeBpm }) {
           <DrumsOneSection
             controls={controls}
             onChangeMode={onChangeMode}
+            tempDrums1Kick={tempDrums1Kick}
+            setTempDrums1Kick={setTempDrums1Kick}
+            commitOnRelease={commitOnRelease}
           />
         </div>
 
@@ -86,6 +93,9 @@ function ControlButtons({ controls, onChangeMode, onChangeBpm }) {
           <DrumsTwoSection
             controls={controls}
             onChangeMode={onChangeMode}
+            tempDrums2Hpf={tempDrums2Hpf}
+            setTempDrums2Hpf={setTempDrums2Hpf}
+            commitOnRelease={commitOnRelease}
           />
         </div>
       </div>

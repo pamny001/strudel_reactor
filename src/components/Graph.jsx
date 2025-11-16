@@ -105,7 +105,7 @@ function Graph() {
     return (
         <div className="App container">
             <h1>
-                Gain Output: {gainValue.toFixed(3)} (events: {eventCount})
+                Gain Output: {gainValue.toFixed(3)}
             </h1>
             <div className="row">
                 <svg
