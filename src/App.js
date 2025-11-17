@@ -14,6 +14,7 @@ import PlayBackButtons from './components/playBackButtons';
 import StrudelContainer from './components/strudelContainer';
 import TextField from './components/textField';
 import SaveLoadButtons from './components/SaveLoadButtons';
+import VolumeControl from "./components/volumeControl";
 import Graph from './components/Graph'
 import StrudelLogo from './StrudelLogo.png';
 import * as d3 from 'd3'
@@ -36,10 +37,12 @@ const [controls, setControls] = useState(defaultControls);//Import controls from
 const [isPlaying, setIsPlaying] = useState(false);//Check if playing.
 const [tempVolume, setTempVolume] = useState(controls.volume ?? 1);//Default volume
 
+//Set volume
 useEffect(() => {
     setTempVolume(controls.volume ?? 1);
 }, [controls.volume]);
 
+//Update controls
 const setAppStateLoad = (updateVar) => {
     const prev = { songText, controls };
     const next = updateVar(prev)
@@ -56,6 +59,7 @@ const setAppStateLoad = (updateVar) => {
 
 };
 
+//Reset to default controls
 const setAppStateReset = (nextObj) => {
     if ("songText" in nextObj) setSongText(nextObj.songText);
     if ("controls" in nextObj) setControls(nextObj.controls);
@@ -81,17 +85,18 @@ const setControl = (key, value) => {
     });
 };
 
-//Play/Stop button functions
+//Play button
 const playButton = () => {
     globalEditor.evaluate();
     setIsPlaying(true);
 };
-
+//Stop button
 const stopButton = () => {
     globalEditor.stop();
     setIsPlaying(false);
 };
 
+//Main code loop
 useEffect(() => {
 
     if (!hasRun.current) {
@@ -188,25 +193,12 @@ return (
                                 </div>
 
                                 <div className="card mt-2">
-                                <div className="card-body">
-                                    <label htmlFor="volumeControl" className="form-label">
-                                    Volume
-                                    </label>
-                                    <input
-                                    type="range"
-                                    className="form-range"
-                                    id="volumeControl"
-                                    min="0"
-                                    max="2"
-                                    step="0.01"
-                                    value={tempVolume}
-                                    onChange={(e) => setTempVolume(parseFloat(e.target.value))}
-                                    onMouseUp={() => setControl("volume", tempVolume)}
+                                    <VolumeControl
+                                        tempVolume={tempVolume}
+                                        setTempVolume={setTempVolume}
+                                        controls={controls}
+                                        setControl={setControl}
                                     />
-                                    <div className="small text-muted">
-                                    Current: {(controls.volume ?? 1).toFixed(2)}
-                                    </div>
-                                </div>
                                 </div>
 
                                 <div className='mt-2'>
