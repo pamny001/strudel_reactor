@@ -52,8 +52,8 @@ export default function SaveLoadButtons({ appState, setAppStateLoad, setAppState
 
   return (
     <>
-      <button className="btn btn-outline-success me-2" onClick={handleSave}>Save</button>
-      <button className="btn btn-outline-success me-2" onClick={handleLoad}>Load</button>
+      <button className="btn btn-warning me-2" onClick={handleSave}>Save</button>
+      <button className="btn btn-warning me-2" onClick={handleLoad}>Load</button>
       <button className="btn btn-danger me-2" onClick={handleReset}>Reset</button>
       {status && (
         <div className="mt-2 text-success fw-semibold">

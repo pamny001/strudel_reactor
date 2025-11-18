@@ -9,13 +9,14 @@ import { getAudioContext, webaudioOutput, registerSynthSounds } from '@strudel/w
 import { registerSoundfonts } from '@strudel/soundfonts';
 import { stranger_tune } from './tunes';
 import console_monkey_patch, { getD3Data } from './console-monkey-patch';
-import ControlButtons from './components/controlButtons';
-import PlayBackButtons from './components/playBackButtons';
-import StrudelContainer from './components/strudelContainer';
-import TextField from './components/textField';
+import ControlButtons from './components/ControlButtons';
+import PlayBackButtons from './components/PlayBackButtons';
+import StrudelContainer from './components/StrudelContainer';
+import TextField from './components/TextField';
 import SaveLoadButtons from './components/SaveLoadButtons';
-import VolumeControl from "./components/volumeControl";
+import VolumeControl from "./components/VolumeControl";
 import Graph from './components/Graph'
+import Footer from './components/Footer'
 import StrudelLogo from './StrudelLogo.png';
 import * as d3 from 'd3'
 
@@ -142,14 +143,12 @@ return (
             className="row justify-content-center py-4"
             style={{ backgroundColor: '#f0d8bd' }}
         >
-            <div className="col-10">
-
-                <img classname="mb-5" src={StrudelLogo} alt="Strudel Demo Logo" 
-                style={{ width: '200px', display: 'block', margin: '0 auto' }}/>
+            <div className="col-11">
+                <Footer logo={StrudelLogo} />
 
                 <main style={{ backgroundColor: '#f7e8d8', padding: '20px', borderRadius: '10px' }}> 
                     
-                    <div className="container">
+                    <div className="container-fluid">
                         <div className='row'>
                             <div className='col-7'>
                                 <div style={{ maxHeight: '50vh', overflowY: 'auto' }}>
